@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Study 30 Seconds</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Greeting Screen -->
+  <section id="greeting-screen">
+    <div class="container">
+      <!-- Title -->
+      <div class="title fade-in">
+        <img src="assets/logo.png" alt="Study 30 Seconds Logo" class="logo">
+        <h1>
+          <span class="study">Study</span>
+          <span class="seconds">30 Seconds</span>
+        </h1>
+      </div>
+
+      <!-- Slogan -->
+      <p class="slogan">
+        <span>Turn</span>
+        <span>Study</span>
+        <span>Time</span>
+        <span>Into</span>
+        <span>Game</span>
+        <span>Time</span>
+      </p>
+
+      <!-- Play Now Button -->
+      <button id="play-now-btn">Play Now</button>
+    </div>
+  </section>
+
+<!-- How to Play Section -->
+<section id="how-to-play">
+  <div class="section-content">
+    <h2>📜 How to Play</h2>
+    <p>
+      Study 30 Seconds is a fast-paced revision game where each team selects a describer who sees 5 computer science concepts and must describe them without saying the actual term. The rest of the team has 30 seconds to guess as many as possible.
+    </p>
+    <ul>
+      <li>Each correct guess earns 1 point.</li>
+      <li>Teams alternate turns each round.</li>
+      <li>First team to reach the winning score wins.</li>
+      <li>The describer cannot pass concepts or use rhyming/similar words.</li>
+      <li>If the describer doesn’t know a concept, the team must try anyway — switching describers mid-round is not allowed (for fairness).</li>
+    </ul>
+  </div>
+</section>
+
+
+<div class="overlay-container">
+    <!-- Setup Screen -->
+    <section id="setup-screen" style="display: none;">
+        <div class="container">
+            <button id="back-btn" class="back-button">← Back</button>
+
+            <!-- Title -->
+            <h2>Game Setup</h2>
+
+            <!-- Team Name Inputs -->
+            <div class="team-inputs">
+            <label>
+                Team A Name:
+                <input type="text" id="teamA" placeholder="Team A">
+            </label>
+            <label>
+                Team B Name:
+                <input type="text" id="teamB" placeholder="Team B">
+            </label>
+            </div>
+
+            <!-- Module Selection -->
+            <div class="module-selection">
+            <p>Select Modules to Include:</p>
+            <label><input type="checkbox" name="module" value="Physics 1" checked> Physics 1</label>
+            <label><input type="checkbox" name="module" value="Electronics 1" checked> Electronics 1</label>
+            <label><input type="checkbox" name="module" value="Eng Maths 1"> Engineering Mathematics 1</label>
+            <label><input type="checkbox" name="module" value="Software Design 1" checked> Software Design 1</label>
+            <label><input type="checkbox" name="module" value="EEP 1"> Electrical Engineering Principles 1</label>
+            <label class="disabled">
+                <input type="checkbox" name="module" value="Computer Architecture 1" disabled>
+                Computer Architecture 1 <span class="coming-soon">(Coming Soon)</span>
+            </label>
+            </div>
+
+            <!-- Winning Score -->
+            <div class="winning-score">
+            <label>
+                🎯 First to
+                <input type="number" id="winningScore" min="5" max="50" value="30">
+                points wins!
+            </label>
+            </div>
+
+            <!-- How to Play -->
+            <div class="how-to-play">
+            <h3>How to Play</h3>
+            <ul>
+                <li>Select your modules and teams</li>
+                <li>Teams take turns describing 5 concepts in 30 seconds</li>
+                <li>Describers are not allowed to say the concepts in card</li>
+                <li>One point for each correct guess</li>
+                <li>First to reach the winning score graduates 🎓</li>
+            </ul>
+            </div>
+
+            <!-- Start Game Button -->
+            <button id="start-game-btn">Start Game</button>
+        </div>
+    </section>
+
+<!-- Game Screen -->
+<section id="game-screen" style="display: none;">
+  <div class="container">
+
+    <!-- Sound Button -->
+    <div id="sound-toggle-container">
+      <span>Sound</span>
+      <div class="checkbox-wrapper-5">
+        <div class="check">
+          <input id="check-5" type="checkbox" checked />
+          <label for="check-5"></label>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- Quit button -->
+    <button id="quit-game-btn" class="quit-btn">🚪 Quit Game</button>
+
+    <!-- Header: Team Turn & Timer -->
+    <div class="game-header">
+      <h2 id="active-team">Team A's Turn</h2>
+      <div id="timer">30s</div>
+    </div>
+
+    <!-- Scoreboard -->
+    <div class="scoreboard">
+      <div class="team-score">
+        <p id="teamA-name">Team A</p>
+        <div class="progress-bar-bg">
+          <div id="teamA-bar" class="progress-bar-fill"></div>
+        </div>
+        <span id="teamA-points">0 pts</span>
+      </div>
+
+      <div class="team-score">
+        <p id="teamB-name">Team B</p>
+        <div class="progress-bar-bg">
+          <div id="teamB-bar" class="progress-bar-fill"></div>
+        </div>
+        <span id="teamB-points">0 pts</span>
+      </div>
+    </div>
+
+    <!-- Game Card -->
+    <div id="card-container" class="card card-theme-default">
+    <div class="card-inner">
+
+        <!-- FRONT of the card -->
+        <div class="card-front">
+
+        <!-- Left vertical label -->
+        <div class="side-label left">STUDY<br>30 SECONDS</div>
+
+        <!-- Center: Concepts list -->
+        <div class="concepts-area">
+            <ul id="concept-list"></ul>
+        </div>
+
+        <!-- Right vertical label -->
+        <div class="side-label right">STUDY<br>30 SECONDS</div>
+
+        </div>
+
+        <!-- BACK of the card -->
+        <div class="card-back">
+
+        <!-- Logo + Title -->
+        <div class="card-back-header">
+            <img src="assets/logo.png" alt="Study 30 Seconds Logo" class="card-logo">
+            <h1>
+            <span class="study-text">study</span>
+            <span class="seconds-text">30 SECONDS</span>
+            </h1>
+        </div>
+
+        <!-- Divider -->
+        <hr class="card-divider" />
+
+        <!-- Slogan -->
+        <p class="card-slogan">
+            <span class="s1">turn</span>
+            <span class="s2">study</span>
+            <span class="s3">time</span>
+            <span class="s4">into</span>
+            <span class="s5">game</span>
+            <span class="s6">time</span>
+        </p>
+
+        </div>
+    </div>
+    </div>
+
+
+    <!-- Start Button -->
+    <button id="start-round-btn">Start</button>
+
+    <!-- Finish Round Button -->
+    <button id="finish-round-btn" style="display: none;">Finish Round</button>
+
+
+    <!-- After Round: Score Input -->
+    <div id="round-result" style="display: none;">
+      <label>
+        How many did <span id="current-team-label">Team A</span> get right?
+        <input type="number" id="round-score" min="0" max="5">
+      </label>
+      <button id="submit-score-btn">Submit</button>
+    </div>
+
+  <!-- Used Concepts Log -->
+  <div class="concept-log-section">
+    <button id="toggle-log-btn">📚 View Used Concepts</button>
+
+    <div id="concept-log" class="concept-log">
+      <div class="log-column" id="teamA-log-column">
+        <h3 id="teamA-log-header">Team A</h3>
+        <ul id="teamA-concepts-log"></ul>
+      </div>
+      <div class="log-column" id="teamB-log-column">
+        <h3 id="teamB-log-header">Team B</h3>
+        <ul id="teamB-concepts-log"></ul>
+      </div>
+    </div>
+  </div>
+
+
+
+  </div>
+</section>
+</div>
+
+<!-- Notification Banner -->
+<div id="notification" class="notification hidden">
+  <p id="notification-message"></p>
+</div>
+
+<!-- Graduation Celebration Modal -->
+<div id="celebration-modal" class="celebration hidden">
+  <div class="celebration-content">
+    <h2 id="winner-message">🎓 Team A has Graduated! 🎓</h2>
+    <div class="celebration-buttons">
+      <button id="play-again-btn">Play Again</button>
+      <button id="return-lobby-btn">Return to Lobby</button>
+    </div>
+  </div>
+</div>
+
+<div id="quit-modal" class="modal-overlay hidden">
+  <div class="modal">
+    <h3>Quit Game?</h3>
+    <p>Are you sure you want to quit? All current match data will be lost.</p>
+    <div class="modal-actions">
+      <button id="cancel-quit" class="cancel-btn">Cancel</button>
+      <button id="confirm-quit" class="confirm-btn">Yes, Quit</button>
+    </div>
+  </div>
+</div>a
+
+
+
+
+
+<script src="script.js" defer></script>
+
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+</body>
+</html>

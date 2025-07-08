@@ -1,0 +1,87 @@
+/* ===== Reset and Base Styles ===== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #001F3F; /* Deep navy */
+  color: white;
+  font-family: 'Poppins', sans-serif;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 1rem;
+}
+
+/* ===== Container ===== */
+.container {
+  max-width: 600px;
+  width: 100%;
+}
+
+/* ===== Title ===== */
+.title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.logo {
+  width: 40px;
+  height: auto;
+}
+
+.title h1 {
+  font-size: 2.5rem;
+  font-weight: bold;
+}
+
+.study {
+  color: #7FDBFF; /* Light blue */
+}
+
+.seconds {
+  color: #FFD700; /* Yellow */
+}
+
+/* ===== Slogan ===== */
+.slogan {
+  font-size: 1.2rem;
+  font-weight: 500;
+  margin-bottom: 2rem;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.slogan span:nth-child(1) { color: #FFDC00; } /* Turn */
+.slogan span:nth-child(2) { color: #2ECC40; } /* Study */
+.slogan span:nth-child(3) { color: #0074D9; } /* Time */
+.slogan span:nth-child(4) { color: #FF851B; } /* Into */
+.slogan span:nth-child(5) { color: #B10DC9; } /* Game */
+.slogan span:nth-child(6) { color: #01FF70; } /* Time */
+
+/* ===== Button ===== */
+#play-now-btn {
+  background-color: #FF4136; /* Bright red */
+  color: white;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  font-weight: bold;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+#play-now-btn:hover {
+  transform: scale(1.05);
+  background-color: #FF5733;
+}
