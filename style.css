@@ -26,24 +26,35 @@ body {
 /* Shared Screen Style (Setup + Game) */
 #setup-screen,
 #game-screen {
-  position: fixed;
+  position: fixed !important;
   top: 0;
   left: 0;
-  z-index: 999;
   width: 100%;
-  height: 100vh;
+  height: 100%;
   background-color: #001F3F;
-
-  display: flex;
+  display: flex !important;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
-
-  overflow-y: auto;
-  padding: 0 1rem;
-
-  /* Hide by default */
-  display: none;
+  padding: 0;
+  z-index: 999;
 }
+
+#setup-screen .container,
+#game-screen .container {
+  width: 100%;
+  max-width: 600px;
+  padding: 2rem 1rem;
+  background: transparent;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#setup-screen { border: 2px dashed lime; }
+#game-screen { border: 2px dashed orange; }
+.container { border: 1px solid red; }
+
 
 #setup-screen .container,
 #game-screen .container {
